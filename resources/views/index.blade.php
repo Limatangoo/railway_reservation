@@ -93,7 +93,7 @@
                 
             </div>
             @error('start_date')
-                    <div class="error">{{ $message }}</div>
+                    <div class="text-danger error">{{ $message }}</div>
             @enderror
         </div>
         <div class="d-flex form-group mb-3">
@@ -112,7 +112,7 @@
 
 <div class="row">
         @if(isset($alltrains))
-       <p class="text-danger">{{$alltrains}}</p>
+       <p class="text-danger text-center mt-4">{{$alltrains}}</p>
        @endif
 </div>
 

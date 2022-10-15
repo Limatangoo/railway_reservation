@@ -68,7 +68,7 @@ class validity extends Controller
                         $price=0;
                         $y=1;
                         for($y=$i;$y<$j;$y++){
-                            $seat_count[$m][$n] = data_get($seat_check[$m], '*.city'.$i);
+                            $seat_count[$m][$n] = data_get($seat_check[$m], '*.city'.$y);
                             $price_array[$m][$n] =  data_get($prices_check[$m], '*.city'.$y)[0];
                             $start_time[$m] = data_get($time_check[$m], '*.city'.$i);
                             $end_time[$m] = data_get($time_check[$m], '*.city'.$j);
@@ -82,23 +82,24 @@ class validity extends Controller
                         $train_id = $seat_check[$m][0]->train_id;
                         $train_type[$m] = DB::select('select * from train_details where train_id = '.$train_id);
                         $total_seats[$m] = $train_type[$m][0]->class1;
-                        //dd($pax_count);
-                        if($pax_count<=($total_seats[$m]-$max_count[$m][0])){
-                          $total_options +=1;
-                          //$seat_check[$m] = $seat_check[$m];
-                          $avail_seats[$m] = $total_seats[$m] - $max_count[$m][0];
-                          
-                        }
+                        //dd($total_seats[$m]-$max_count[$m][0]);
                         if($end_time[$m][0]<$start_time[$m][0]){
                             $journey_end_date[$m] = date('Y-m-d',strtotime($start_date . ' +1 day'));
                             }
                         else{
                         $journey_end_date[$m] = $start_date;
                         } 
-                        $m++;
+                        if($pax_count<=($total_seats[$m]-$max_count[$m][0])){
+                          $total_options +=1;
+                          //$seat_check[$m] = $seat_check[$m];
+                          $avail_seats[$m] = $total_seats[$m] - $max_count[$m][0];
+                          $m++;
+                        }
+                        
+                        
                         }
                          
-                        dd($total_options);
+                        //dd($total_options);
                         //dd($seat_check[0][0]->date);
                       } 
                    $j++;
@@ -112,7 +113,7 @@ class validity extends Controller
              
               $i++;
            }
-           //dd($total_options);
+           //dd($m);
           //dd($seat_check);
           if($total_options>0){
             return view('index',['total_options'=> $total_options,'seat_check'=>$seat_check,'avail_seats'=>$avail_seats,'total_price'=>$total_price,'journey_end_date'=>$journey_end_date,'start_time'=>$start_time,'end_time'=>$end_time,'city1'=>$city1,'city2'=>$city2]);
