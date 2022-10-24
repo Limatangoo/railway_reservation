@@ -17,7 +17,20 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-
+use App\Orchid\Screens\trainRoutes;
+use App\Orchid\Screens\trainRoutesAdd;
+use App\Orchid\Screens\trainRoutesEdit;
+use App\Orchid\Screens\timeTable;
+use App\Orchid\Screens\timeTableAdd;
+use App\Orchid\Screens\timeTableEdit;
+use App\Orchid\Screens\seatAvailability;
+use App\Orchid\Screens\seatavailabilityedit;
+use App\Orchid\Screens\pricesTable;
+use App\Orchid\Screens\pricesTableAdd;
+use App\Orchid\Screens\pricesTableEdit;
+use App\Orchid\Screens\trainDetails;
+use App\Orchid\Screens\trainDetailsEdit;
+use App\Orchid\Screens\trainDetailsAdd;
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -111,5 +124,17 @@ Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.exam
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-
-//Route::screen('idea', Idea::class, 'platform.screens.idea');
+Route::screen('/trainroutes', trainRoutes::class)->name('platform.trainroutes');
+Route::screen('trainrouteedit/{target?}', trainRoutesEdit::class)->name('platform.trainrouteedit');
+Route::screen('trainrouteadd', trainRoutesAdd::class)->name('platform.trainrouteadd');
+Route::screen('timetable', timeTable::class)->name('platform.timetable');
+Route::screen('timetableadd', timeTableAdd::class)->name('platform.timetableadd');
+Route::screen('timetableedit/{target?}', timeTableEdit::class)->name('platform.timetableedit');
+Route::screen('seatavailability', seatAvailability::class)->name('platform.seatavailability');
+Route::screen('seatavailabilityedit/{target?}', seatAvailabilityEdit::class)->name('platform.seatavailabilityedit');
+Route::screen('pricestable', pricesTable::class)->name('platform.pricestable');
+Route::screen('pricestableadd', pricesTableAdd::class)->name('platform.pricestableadd');
+Route::screen('pricestableedit/{target?}', pricesTableEdit::class)->name('platform.pricestableedit');
+Route::screen('traindetails', trainDetails::class)->name('platform.traindetails');
+Route::screen('traindetailsadd', trainDetailsAdd::class)->name('platform.traindetailsadd');
+Route::screen('traindetailsedit/{target?}', trainDetailsEdit::class)->name('platform.traindetailsedit');

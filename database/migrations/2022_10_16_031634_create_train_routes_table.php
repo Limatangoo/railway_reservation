@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('train_routes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('route_id');
             $table->string('city1')->nullable();
             $table->string('city2')->nullable();
             $table->string('city3')->nullable();

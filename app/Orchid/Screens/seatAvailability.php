@@ -8,24 +8,22 @@ use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
-use App\Orchid\Layouts\trainRoutesTable;
-use App\Models\train_routes;
-use Illuminate\Support\Facades\DB;
+use App\Orchid\Layouts\seatAvailabilityLayout;
+use App\Models\seat_checks;
 use Orchid\Support\Facades\Alert;
 
-class trainRoutes extends Screen
+
+class seatAvailability extends Screen
 {
     /**
      * Query data.
      *
      * @return array
      */
-     public $train_routes;
     public function query(): iterable
     {
         return [
-
-            'train_routes' => train_routes::filters()->defaultSort('id')->paginate(10)
+            'seat_checks' => seat_checks::filters()->defaultSort('id')->paginate(10)
         ];
     }
 
@@ -36,7 +34,7 @@ class trainRoutes extends Screen
      */
     public function name(): ?string
     {
-        return 'TrainRoutes';
+        return 'Seats Booked';
     }
 
     /**
@@ -46,11 +44,7 @@ class trainRoutes extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Link::make('add new route')
-                ->route('platform.trainrouteadd')
-                ->icon('plus'),
-        ];
+        return [];
     }
 
     /**
@@ -61,12 +55,13 @@ class trainRoutes extends Screen
     public function layout(): iterable
     {
         return [
-            trainRoutesTable::class 
+            seatAvailabilityLayout::class 
         ];
     }
+
     public function remove(Request $request){
-        $train_routes = new train_routes;
-        $train_routes->where('id',$request->id)->delete();
-        Alert::message('you have deleted route id: '.$request->id.'');
+        $seat_checks = new seat_checks;
+        $seat_checks->where('id',$request->id)->delete();
+        Alert::message('you have deleted the seat checks of id: '.$request->id.'');
    }
 }

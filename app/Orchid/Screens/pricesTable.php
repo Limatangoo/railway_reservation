@@ -8,24 +8,22 @@ use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
-use App\Orchid\Layouts\trainRoutesTable;
-use App\Models\train_routes;
+use App\Orchid\Layouts\pricesTableLayout;
+use App\Models\prices;
 use Illuminate\Support\Facades\DB;
 use Orchid\Support\Facades\Alert;
 
-class trainRoutes extends Screen
+class pricesTable extends Screen
 {
     /**
      * Query data.
      *
      * @return array
      */
-     public $train_routes;
     public function query(): iterable
     {
         return [
-
-            'train_routes' => train_routes::filters()->defaultSort('id')->paginate(10)
+            'prices' => prices::filters()->defaultSort('route_id')->paginate(10)
         ];
     }
 
@@ -36,7 +34,7 @@ class trainRoutes extends Screen
      */
     public function name(): ?string
     {
-        return 'TrainRoutes';
+        return 'Prices Table';
     }
 
     /**
@@ -47,8 +45,8 @@ class trainRoutes extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('add new route')
-                ->route('platform.trainrouteadd')
+            Link::make('add new prices for a route')
+                ->route('platform.pricestableadd')
                 ->icon('plus'),
         ];
     }
@@ -61,12 +59,13 @@ class trainRoutes extends Screen
     public function layout(): iterable
     {
         return [
-            trainRoutesTable::class 
+            pricesTableLayout::class 
         ];
     }
+
     public function remove(Request $request){
-        $train_routes = new train_routes;
-        $train_routes->where('id',$request->id)->delete();
-        Alert::message('you have deleted route id: '.$request->id.'');
+        $prices = new prices;
+        $prices->where('id',$request->id)->delete();
+        Alert::message('you have deleted the price details of route id: '.$request->route_id.'');
    }
 }

@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
-
+use Orchid\Filters\Filterable;
 class train_routes extends Model
 {
     use HasFactory;
 
-    use AsSource;
+    use AsSource,Filterable;
 
     /**
      * @var array
      */
     protected $fillable = [
-        'route_id',
+        'id',
         'city1',
         'city2',
         'city3',
@@ -28,4 +28,15 @@ class train_routes extends Model
         'city9',
         'city10'
     ];
+
+     /**
+     * Name of columns to which http sorting can be applied
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id'
+    ];
+
+    
 }

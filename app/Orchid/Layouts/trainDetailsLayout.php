@@ -10,7 +10,8 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Button;
 
-class trainRoutesTable extends Table
+
+class trainDetailsLayout extends Table
 {
     /**
      * Data source.
@@ -20,9 +21,7 @@ class trainRoutesTable extends Table
      *
      * @var string
      */
-    
-   
-    protected $target = 'train_routes';
+    protected $target = 'train_details';
 
     /**
      * Get the table cells to be displayed.
@@ -33,38 +32,26 @@ class trainRoutesTable extends Table
     {
         return [
             TD::make('id')->sort(),
-            TD::make('city1'),
-            TD::make('city2'),
-            TD::make('city3'),
-            TD::make('city4'),
-            TD::make('city5'),
-            TD::make('city6'),
-            TD::make('city7'),
-            TD::make('city8'),
-            TD::make('city9'),
-            TD::make('city10'),
+            TD::make('class1'),
+            TD::make('class2'),
+            TD::make('class3'),
             TD::make('Actions')
                 ->render(function ($target) {
                     return DropDown::make()
                     ->icon('options-vertical')
                     ->list([
                         Link::make(__('Edit'))
-                        ->route('platform.trainrouteedit', $target)
+                        ->route('platform.traindetailsedit', $target)
                         ->icon('pencil'),
 
                         Button::make('Delete')
                         ->icon('trash')
-                         // remove method defined in Screen
-                        //->confirm(__('Once the route is deleted, all of its resources and data will be permanently deleted'))
                         ->parameters([
                             'id' => ($target->id)
                         ])
                         ->method('remove')
                     ]);
                 }),
-
         ];
     }
-
-    
 }

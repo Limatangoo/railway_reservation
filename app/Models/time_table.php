@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
+use Orchid\Filters\Filterable;
 
 class time_table extends Model
 {
     use HasFactory;
 
-    use AsSource;
+    use AsSource,Filterable;
 
-    /**
-     * @var array
-     */
     protected $fillable = [
         'route_id',
         'city1',
@@ -27,5 +25,9 @@ class time_table extends Model
         'city8',
         'city9',
         'city10'
+    ];
+
+    protected $allowedSorts = [
+        'route_id'
     ];
 }

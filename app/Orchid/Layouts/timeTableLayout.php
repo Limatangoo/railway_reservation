@@ -10,7 +10,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Button;
 
-class trainRoutesTable extends Table
+class timeTableLayout extends Table
 {
     /**
      * Data source.
@@ -20,9 +20,7 @@ class trainRoutesTable extends Table
      *
      * @var string
      */
-    
-   
-    protected $target = 'train_routes';
+    protected $target = 'time_table';
 
     /**
      * Get the table cells to be displayed.
@@ -32,7 +30,7 @@ class trainRoutesTable extends Table
     protected function columns(): iterable
     {
         return [
-            TD::make('id')->sort(),
+            TD::make('route_id')->sort(),
             TD::make('city1'),
             TD::make('city2'),
             TD::make('city3'),
@@ -49,13 +47,11 @@ class trainRoutesTable extends Table
                     ->icon('options-vertical')
                     ->list([
                         Link::make(__('Edit'))
-                        ->route('platform.trainrouteedit', $target)
+                        ->route('platform.timetableedit', $target)
                         ->icon('pencil'),
 
                         Button::make('Delete')
                         ->icon('trash')
-                         // remove method defined in Screen
-                        //->confirm(__('Once the route is deleted, all of its resources and data will be permanently deleted'))
                         ->parameters([
                             'id' => ($target->id)
                         ])
@@ -65,6 +61,4 @@ class trainRoutesTable extends Table
 
         ];
     }
-
-    
 }

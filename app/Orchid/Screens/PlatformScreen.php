@@ -7,6 +7,17 @@ namespace App\Orchid\Screens;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\Relation;
+use App\Models\train_routes;
+use App\Models\time_table;
+use App\Models\train_details;
+use App\Models\seat_checks;
+use App\Models\prices;
+use App\Orchid\Layouts\trainRoutesTable;
+use App\Orchid\Layouts\timeTable;
+use App\Orchid\Layouts\commonTable;
 
 class PlatformScreen extends Screen
 {
@@ -17,7 +28,10 @@ class PlatformScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'train_routes' => train_routes::paginate(),
+            'time_table' => time_table::paginate()
+        ];
     }
 
     /**
@@ -27,7 +41,7 @@ class PlatformScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Get Started';
+        return 'Hello';
     }
 
     /**
@@ -37,7 +51,7 @@ class PlatformScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
+        return 'Welcome to Railway Reservation Dashboard';
     }
 
     /**
@@ -48,7 +62,7 @@ class PlatformScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('Website')
+            /*Link::make('Website')
                 ->href('http://orchid.software')
                 ->icon('globe-alt'),
 
@@ -58,7 +72,7 @@ class PlatformScreen extends Screen
 
             Link::make('GitHub')
                 ->href('https://github.com/orchidsoftware/platform')
-                ->icon('social-github'),
+                ->icon('social-github'),*/
         ];
     }
 
@@ -70,7 +84,7 @@ class PlatformScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::view('platform::partials.welcome'),
+            trainRoutesTable::class
         ];
     }
 }

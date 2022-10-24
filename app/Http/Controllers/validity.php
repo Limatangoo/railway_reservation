@@ -56,7 +56,7 @@ class validity extends Controller
                     $result_2[$j-1] = data_get($results, '*.city'.$j);
                     if($result_1[$i-1][$x-1]==$city1 && $result_2[$j-1][$x-1]==$city2 && $j>$i){
                         $routes[$m] = DB::select('select * from train_routes where city'.$i.'="'. $city1.'" and city'.$j.'="'. $city2.'"');
-                        $route_ids[$m] = $routes[$m][0]->route_id; 
+                        $route_ids[$m] = $routes[$m][0]->id; 
                         //dd($route_ids[$m]);
                         $seat_check[$m] = DB::select('select * from seat_checks where route_id = '.$route_ids[$m].' and date = "'.$start_date.'"');
                         //print(count($seat_check[$m]));
@@ -80,7 +80,7 @@ class validity extends Controller
                        
                         
                         $train_id = $seat_check[$m][0]->train_id;
-                        $train_type[$m] = DB::select('select * from train_details where train_id = '.$train_id);
+                        $train_type[$m] = DB::select('select * from train_details where id = '.$train_id);
                         $total_seats[$m] = $train_type[$m][0]->class1;
                         //dd($total_seats[$m]-$max_count[$m][0]);
                         if($end_time[$m][0]<$start_time[$m][0]){

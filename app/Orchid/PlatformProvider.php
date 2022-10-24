@@ -9,6 +9,8 @@ use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Color;
+use App\Models\train_routes;
+use Illuminate\Support\Facades\DB;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -28,60 +30,31 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make('Example screen')
-                ->icon('monitor')
-                ->route('platform.example')
+            Menu::make('Train Routes')
+                ->icon('directions')
+                ->route('platform.trainroutes')
                 ->title('Navigation')
                 ->badge(function () {
-                    return 6;
+                    $findRouteId = DB::select('select id FROM train_routes');
+                    $trainRouteCount=count($findRouteId);
+                    return $trainRouteCount;
                 }),
 
-            Menu::make('Dropdown menu')
-                ->icon('code')
-                ->list([
-                    Menu::make('Sub element item 1')->icon('bag'),
-                    Menu::make('Sub element item 2')->icon('heart'),
-                ]),
+            Menu::make('Time Table')
+                ->icon('clock')
+                ->route('platform.timetable'),
 
-            Menu::make('Basic Elements')
-                ->title('Form controls')
-                ->icon('note')
-                ->route('platform.example.fields'),
+            Menu::make('Seat Availability')
+                ->icon('event')
+                ->route('platform.seatavailability'),
 
-            Menu::make('Advanced Elements')
-                ->icon('briefcase')
-                ->route('platform.example.advanced'),
+            Menu::make('Prices Table')
+                ->icon('dollar')
+                ->route('platform.pricestable'),
 
-            Menu::make('Text Editors')
-                ->icon('list')
-                ->route('platform.example.editors'),
-
-            Menu::make('Overview layouts')
-                ->title('Layouts')
-                ->icon('layers')
-                ->route('platform.example.layouts'),
-
-            Menu::make('Chart tools')
-                ->icon('bar-chart')
-                ->route('platform.example.charts'),
-
-            Menu::make('Cards')
-                ->icon('grid')
-                ->route('platform.example.cards')
-                ->divider(),
-
-            Menu::make('Documentation')
-                ->title('Docs')
-                ->icon('docs')
-                ->url('https://orchid.software/en/docs'),
-
-            Menu::make('Changelog')
-                ->icon('shuffle')
-                ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
-                ->target('_blank')
-                ->badge(function () {
-                    return Dashboard::version();
-                }, Color::DARK()),
+            Menu::make('Train Details')
+            ->icon('task')
+            ->route('platform.traindetails'),
 
             Menu::make(__('Users'))
                 ->icon('user')

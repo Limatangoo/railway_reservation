@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('train_details', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('train_id');
             $table->integer('class1')->nullable();
             $table->integer('class2')->nullable();
             $table->integer('class3')->nullable();
