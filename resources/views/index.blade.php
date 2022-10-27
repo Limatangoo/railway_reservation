@@ -137,7 +137,7 @@
             <td>{{$journey_end_date[$i]}}<br>{{$end_time[$i][0]}}<br>{{$city2}}</td>
             <td>{{$avail_seats[$i]}}</td>
             <td>{{$total_price[$i]}}</td>
-            <td><button type="button" class="btn btn-warning">Book Now</button></td>
+            <td><a href="/traveller/{{$seat_check[$i][0]->id}}/{{$pax_count}}/{{$city1}}/{{$city2}}/{{$total_price[$i]}}" ><button type="button" class="btn btn-warning">Book Now</button></a></td>
         </tr>
     @endfor
   

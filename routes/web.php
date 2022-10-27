@@ -17,3 +17,5 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/validity', 'App\Http\Controllers\validity@routecheck');
+Route::get('/traveller/{seat_check_id}/{pax_count}/{city1}/{city2}/{total_price}' ,'App\Http\Controllers\bookingController@bookingIndex');
+Route::get('/traveller/ticket' ,'App\Http\Controllers\bookingController@bookingCheck');

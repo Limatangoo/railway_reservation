@@ -32,7 +32,12 @@ class validity extends Controller
         if($city1==$city2){
             return view('index',['alltrains'=>'origin and destination cannot be same']);
         }
-        
+        if($pax_count<1){
+          return view('index',['alltrains'=>'Number of passengers should be greater than 0']);
+        }
+        if($pax_count>5){
+          return view('index',['alltrains'=>'Maximum number of passengers allowed per ticket is 5']);
+        }
         
         $results = DB::select('select * from train_routes where (city1 = "'.$city1.'" or city2 = "'.$city1.'" or city3 = "'.$city1.'"or city4 = "'.$city1.'"or city5 = "'.$city1.'"or city6 = "'.$city1.'"or city7 = "'.$city1.'"or city8 = "'.$city1.'"or city9 = "'.$city1.'"or city10 = "'.$city1.'") and (city1 = "'.$city2.'"or city2 = "'.$city2.'"or city3 = "'.$city2.'"or city4 = "'.$city2.'"or city5 = "'.$city2.'"or city6 = "'.$city2.'"or city7 = "'.$city2.'"or city8 = "'.$city2.'"or city9 = "'.$city2.'"or city10 = "'.$city2.'")');
         if(count($results)<=0){
@@ -116,7 +121,7 @@ class validity extends Controller
            //dd($m);
           //dd($seat_check);
           if($total_options>0){
-            return view('index',['total_options'=> $total_options,'seat_check'=>$seat_check,'avail_seats'=>$avail_seats,'total_price'=>$total_price,'journey_end_date'=>$journey_end_date,'start_time'=>$start_time,'end_time'=>$end_time,'city1'=>$city1,'city2'=>$city2]);
+            return view('index',['total_options'=> $total_options,'seat_check'=>$seat_check,'avail_seats'=>$avail_seats,'total_price'=>$total_price,'journey_end_date'=>$journey_end_date,'start_time'=>$start_time,'end_time'=>$end_time,'city1'=>$city1,'city2'=>$city2,'pax_count'=>$pax_count]);
           }
           else{
             return view('index',['alltrains'=>'Sorry! no tickets for that date']);
