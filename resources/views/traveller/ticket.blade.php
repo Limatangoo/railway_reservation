@@ -59,8 +59,9 @@
                 <div class="d-flex flex-row justify-content-around">
                 
                 @for ($i = 0; $i < $pax_count; $i++)
+                <?php $seatNum = ${'seatNum' . $i+1} ?>
                     <div>
-                        <p>{{$max_seat_count+($i+1)}}A</p>
+                        <p>{{$seatNum}}A</p>
                     </div>
                 @endfor
                 </div>
@@ -84,8 +85,9 @@
             </div>
             <div class="col-8">{{date('Y-m-d h:i:s', time())}}</div>
         </div>
+        
         <div class="row mt-5 text-center">
-            <a href=""><button class="btn btn-primary mt-3 w-10">Download</button></a>
+            <a href="/traveller/downloadTicket/{{$bookingId}}"><button class="btn btn-primary mt-3 w-10">Download</button></a>
         </div>
     
 
